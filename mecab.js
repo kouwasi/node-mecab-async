@@ -8,7 +8,7 @@ var MeCab = function() {};
 MeCab.prototype = {
     command : 'mecab',
     options : {},
-    parser: data => (data.length <= 8) ? null : {
+    parser: data => (data.length < 8) ? null : {
         // Ref: http://mecab.googlecode.com/svn/trunk/mecab/doc/index.html
         // 表層形\t品詞,品詞細分類1,品詞細分類2,品詞細分類3,活用形,活用型,原形,読み,発音
         kanji         : data[0],
@@ -19,7 +19,7 @@ MeCab.prototype = {
         conjugation   : data[5],
         inflection    : data[6],
         original      : data[7],
-        reading       : data[8],
+        reading       : data[8] || data[0],
         pronunciation : data[9] || ''
     },
     _format : function(arr) {
